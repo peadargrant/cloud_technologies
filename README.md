@@ -17,7 +17,7 @@ To pull updates into your local repository use:
 	git pull --rebase
 
 
-## Power
+## PowerShell scripts
 
 PowerShell scripts: this course uses PowerShell (and other) scripts in many topics. If you get errors that scripts are blocked you should issue the command:
 
