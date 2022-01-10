@@ -20,3 +20,9 @@ To get the cloud techologies version of this module, clone:
 
 	git checkout -b technologies https://github.com/peadargrant/cloud
 
+## Y3 Cloud Foundations
+
+To get the cloud foundations version of this module, clone:
+
+	git checkout -b foundations https://github.com/peadargrant/cloud
+
