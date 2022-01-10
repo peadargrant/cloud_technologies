@@ -9,3 +9,11 @@ Although the lab content is identical, the CA content is not.
 
 	git checkout https://github.com/peadargrant/cloud_labs
 
+## Updating this repository
+
+This repository will be updated as the academic term progresses.
+To pull updates into your local repository use:
+
+	git pull --rebase
+
+
