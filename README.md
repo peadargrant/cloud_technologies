@@ -25,5 +25,5 @@ PowerShell scripts: this course uses PowerShell (and other) scripts in many topi
 
 ## Shell captures
 
-Shell captures from class where available are in the _capture folder of each topic.
+Shell captures from class where available are in the `_capture` folder of each topic.
 
