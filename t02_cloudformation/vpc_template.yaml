@@ -107,12 +107,12 @@ Resources:
   Instance:
     Type: AWS::EC2::Instance
     Properties:
-      InstanceType: t2.micro
+      InstanceType: t3.micro
       SubnetId: !Ref Subnet
       ImageId: !Ref LatestLinuxImageId
       SecurityGroupIds:
       - !Ref SecurityGroup
-      KeyName: MAIN_KEY # generally keys will be already existing
+      KeyName: LAB_KEY # generally keys will be already existing
         
 Outputs:
 
