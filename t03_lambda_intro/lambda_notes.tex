@@ -8,65 +8,52 @@
 
 \section{Serverless compute}\label{serverless-compute}
 
-Serverless function are the basic PaaS compute component:
+\begin{center}
+  \includegraphics[width=0.2\linewidth]{lambda_logo}
+\end{center}
+
+\textbf{Serverless functions} are the basic PaaS compute component:
 \begin{itemize}
 \item Sometimes referred to as Function-as-a-Service
 \item basic FaaS offering in AWS is called Lambda.
 \end{itemize}
 
-\textbf{Recommended reading:}  \href{https://docs.aws.amazon.com/lambda/latest/dg/welcome.html}{AWS lambda developer guide}
 
-
-
-\subsection{Key components}\label{key-components}
-
-From the
-\href{https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-concepts.html}{AWS
-lambda concepts}:
+\subsection{Lambda components}\label{key-components}
 
 \begin{description}
 \item[Function]
-is an AWS resource you can \emph{invoke} to run your own code on AWS
-infrastructure.
-
+  is an AWS resource you can \emph{invoke} to run your own code on AWS infrastructure.
 \begin{itemize}
-
 \item
   Lambda runs your custom code on AWS
 \item
-  No need for EC2 instances and VPC.
+  No need for you to setup EC2 instances and VPC.
 \end{itemize}
 \item[Executable]
-consists of \textit{code} within a lambda-provided \textit{runtime}:
-
-\begin{description}
-\item[Code]
-is provided by you, either as source code, bytecode or compiled code.
-\item[Runtime]
-is provided by AWS. You need to pick the correct runtime for the code
-you wish to run.
+  consists of \textit{code} within a lambda-provided \textit{runtime}:
+  \begin{description}
+  \item[Code:]
+    provided by you, (source code, bytecode or compiled code).
+  \item[Runtime:]
+    provided by AWS. (must match code)
 \end{description}
-
 \item[Event] \textbf{invokes} the lambda function. Might be:
   \begin{itemize}
   \item explicit \texttt{invoke} at the CLI or console, or
-  \item event triggered from other AWS services (S3, SNS, API Gateway) including within Lambda itself (SQS polling).
+  \item triggered from other AWS services (S3, SNS, API Gateway, SQS polling).
   \end{itemize}
 \end{description}
 
-\section{Use cases}
-
-
-
-
-
 \section{Code}\label{code}
+
+~
+
 
 \subsection{Runtime}\label{runtime}
 
-The Runtime refers to the support AWS Lambda offers for different
-languages. You can in theory run code in any language that AWS EC2
-supports on Lambda. Supports offered for different languages varies:
+Runtime refers to the support AWS Lambda offers for different languages.
+Supports offered for different languages varies:
 
 \begin{itemize}
 \item
@@ -82,9 +69,8 @@ supports on Lambda. Supports offered for different languages varies:
   \item These include: Java, .net (incl. C\# and PowerShell).
   \end{itemize}
 \item
-  Code that can run on EC2 using Amazon Linux can be run on Lambda by
-  creating a \emph{custom runtime}. This is an involved process but very
-  useful for porting legacy code to Lambda.
+  Other languages or legacy code can be run on Lambda by creating a \emph{custom runtime}.
+  (Involved process!)
 \end{itemize}
 
 \subsection{Deployment package creation}\label{deployment-package-creation}
@@ -94,13 +80,19 @@ precise layout will depend on the chosen runtime.
 
 \begin{itemize}
 \item
+  You don't need to worry about this when creating code in the AWS Console.
+\item
   Interpreted languages (like Python, JS) will need the source files.
 \item
   Bytecode-compiled languages (like Java) will consist of the
   bytecode-compiled class files.
 \end{itemize}
 
-The relevant files can be ZIPped using the \texttt{Compress-Archive} cmdlet in PowerShell.
+The relevant files can be ZIPped using:
+\begin{itemize}
+\item On Windows \texttt{Compress-Archive} cmdlet in PowerShell.
+\item On Mac / Linux \texttt{zip} command in Bash/zsh.
+\end{itemize}
 
 \section{Execution role}\label{execution-role}
 
@@ -110,11 +102,11 @@ permissions to use other AWS resources in your account.
 Each execution role has a name (e.g. \texttt{helloworld-ex}) from which
 we can derive its ARN:
 
-\begin{verbatim}
+\begin{minted}{powershell}
 $ExecutionRoleName="helloworld-ex"
 $ExecutionRoleArn="arn:aws:iam::123456789012:role/helloworld-ex"
 Write-Host $ExecutionRoleArn
-\end{verbatim}
+\end{minted}
 
 \subsection{Trust policy}\label{sec:trust-policy}
 
@@ -122,15 +114,17 @@ The trust policy specifies what AWS component(s) can assume the role.
 
 \inputminted{json}{trust_policy.json}
 
+You can use this trust policy as-is for all your lambda code. 
+
 \subsection{Attached policies}\label{attached-policies}
 
 Execution roles can then have policies attached using \texttt{iam}.
 Rather than write these from scratch, we will attached AWS Managed
-Policies. The simplest policy allows a lambda function to write to
-CloudWatch Logs:
+Policies.
 
+\newpage
+The simplest policy (\texttt{AWSLambdaBasicExecutionRole}) allows a lambda function to write to CloudWatch Logs:
 \inputminted{json}{AWSLambdaBasicExecutionRole.json}
-
 Additional policies can be attached (or created and attached) if the
 lambda function needs access to other AWS services.
 
@@ -155,12 +149,12 @@ creation}\label{deployment-package-creation-1}
 
 To package the code into a ZIP we can:
 
-\begin{verbatim}
+\begin{minted}{powershell}
 Compress-Archive -Path hello_handler.py -DestinationPath hello_code.zip
 
 # issues on Mac/Linux in PowerShell due to file permissions, use instead (in Bash):
 zip hello_code.zip hello_handler.py
-\end{verbatim}
+\end{minted}
 
 \subsection{Execution role creation}\label{execution-role-creation}
 
@@ -170,7 +164,7 @@ Our simple trust policy allows Lambda to assume the role (and will work for most
 
 Then we can create the execution role itself:
 
-\begin{verbatim}
+\begin{minted}{powershell}
 # create the role 
 aws iam create-role `
 --role-name hello-ex `
@@ -180,7 +174,7 @@ aws iam create-role `
 aws iam attach-role-policy `
 --role-name helloworld-ex `
 --policy-arn arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
-\end{verbatim}
+\end{minted}
 
 \subsection{Function creation}\label{function-creation}
 
@@ -192,49 +186,45 @@ it normally is:
 [file (without extension)].[function name]
 \end{verbatim}
 
-\begin{verbatim}
+\begin{minted}{powershell}
 aws lambda create-function `
 --function-name hello `
 --zip-file fileb://hello_code.zip `
 --handler hello_handler.hello_handler `
 --runtime python3.8 `
 --role arn:aws:iam::123456789012:role/hello-ex 
-\end{verbatim}
+\end{minted}
 
 \subsection{Invoking the function}\label{invoking-the-function}
 
 We invoke (or run) the function:
 
-\begin{verbatim}
+\begin{minted}{powershell}
 # invoke the function
-aws lambda invoke `
---function-name hello `
-out.txt
+aws lambda invoke --function-name hello out.txt
 
 # read output produced
 Get-Content hello_out.txt 
-\end{verbatim}
+\end{minted}
 
 \subsection{Updating code}\label{updating-code}
 
 If we want to update the function's code, we can modify the source files
 and then:
 
-\begin{verbatim}
+\begin{minted}{powershell}
 # new ZIP file:
 Compress-Archive -Force -Path hello_handler.py -DestinationPath hello_code.zip
 
 # update the code on Lambda
-aws lambda update-function-code `
---function-name hello `
-~--zip-file fileb://hello_code.zip 
-\end{verbatim}
+aws lambda update-function-code --function-name hello --zip-file fileb://hello_code.zip 
+\end{minted}
 
 \subsection{Deletion}\label{deletion}
 
-\begin{verbatim}
+\begin{minted}{powershell}
 aws lambda delete-function --function-name hello
-\end{verbatim}
+\end{minted}
 
 \section{Input handling}\label{input-handling}
 
