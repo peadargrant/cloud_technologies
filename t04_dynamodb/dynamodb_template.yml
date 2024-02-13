@@ -1,16 +1,17 @@
+# Basic template for DynamoDB table
+
 Resources:
   Table:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: contacts # name of table (can leave blank)
+      TableName: tasks # name of table (can leave blank)
       BillingMode: PAY_PER_REQUEST
+      # simple primary key defined by AttributeDefinitions and KeySchema
       AttributeDefinitions:
         -
-          AttributeName: id # name of PK attribute
+          AttributeName: name # name of PK attribute
           AttributeType: S # type of PK attribute
-      
       KeySchema:
         -
-          AttributeName: id # should be same as above
+          AttributeName: name # should be same as above
           KeyType: HASH
-
