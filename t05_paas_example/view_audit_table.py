@@ -4,13 +4,12 @@ import boto3
 dynamodb = boto3.resource('dynamodb')
 
 # get the table from the dynamodb service
-table = dynamodb.Table('message_table')
+table = dynamodb.Table('audit')
 
 def print_table_contents():
     items = table.scan()['Items']
     for item in items:
-        print(item['subject'])
-        print(item['message'])
+        print('%s, %s, %s' % ( item['username'], item['hostname'], item['item']))
 
 if __name__=='__main__':
     print_table_contents()
