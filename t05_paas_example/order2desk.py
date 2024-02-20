@@ -13,7 +13,7 @@ print("Welcome to the Order 2 Desk system")
 
 # auto-detect username
 username = os.getlogin()
-print("Member name: $username")
+print("Member name: %s" % username)
 
 # auto-detect host name
 hostname = platform.node()
