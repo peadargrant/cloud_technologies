@@ -1,0 +1,33 @@
+digraph G {
+
+	rankdir=LR;
+	labelloc="t";
+
+	subgraph cluster_employee_pc {
+		label="Employee PC";
+		OrderClient [ label="Order client\norder2desk.py" ];
+		}
+
+		subgraph cluster_cloud {
+			label="Cloud (AWS)";			
+	MenuBucket [ label="S3 bucket\nfor menu"];
+	OrderRouter [ label="Order router\norder2desk_handler\norder2desk_handler.py" ];
+
+	AuditTable [ label="DynamoDB table\naudit" ];
+	OrderRouter -> AuditTable;
+
+	KitchenQueue [ label="SQS Queue\nkitchenq" ];
+	OrderRouter -> KitchenQueue ;
+	}
+
+	OrderClient -> MenuBucket;	
+	OrderClient -> OrderRouter; 
+
+	subgraph cluster_kitchen_pc {
+		label="Kitchen PC";
+		OrderMonitor [ label="Order monitor\nmonitor.py"];
+		OrderMonitor -> KitchenQueue; 
+	}
+	
+}
+

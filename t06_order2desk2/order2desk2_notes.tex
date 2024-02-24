@@ -1,0 +1,66 @@
+\documentclass[slides]{pgnotes}
+
+\title{order2desk example Part 2}
+
+\begin{document}
+
+\maketitle
+
+\section{Scenario}
+
+A tech company allows its in office employees to order snacks and beverages to their working desk:
+\begin{itemize}
+\item Workers are assigned a Mac, Windows or Linux computer.
+\item They can order food / drinks by means of a Python script \texttt{order2desk.py} that presents a menu on the command-line and accepts their selection(s).
+\item The script automatically discovers their username and hostname.
+\item Once prepared, their catering partner then brings the order to their desk.
+\end{itemize}
+In the kitchen:
+\begin{itemize}
+\item A PC has a Python script that presents each order in sequence on a screen.
+\end{itemize}
+
+\subsection{Improvements}
+
+The system has been working well, but some improvements are needed:
+
+\begin{enumerate}
+\item \textbf{Dynamically loaded menu} replacing the hardcoded beverage options.
+\item \textbf{Lambda function} needs to be setup in \textbf{CloudFormation}.
+\item \textbf{Resources} should be looked up in CloudFormation and not hardcoded.
+\item \textbf{Permissions} need to be scoped to the actual actions on the actual resources.  
+\end{enumerate}
+  
+\section{System architecture}
+
+\autoimage{order2desk_system}{order2desk system}{order2desk-system}
+
+\subsection{Dynamic lookup}
+
+We want all components to look up resources from the CloudFormation template:
+\begin{itemize}
+\item Outputs in CloudFormation template pointing to resources
+\item Dynamic lookup using a \texttt{cf\_output} function in Python in \texttt{common.py}
+\end{itemize}
+
+\subsection{Dynamic menu}
+
+\begin{itemize}
+\item Menu is defined in a JSON file \texttt{menu.json}.
+\item Loaded by \texttt{order2desk.py} from S3 bucket.
+\item S3 bucket looked up from CloudFormation. 
+\end{itemize}
+
+\subsection{Permissions}
+
+\begin{center}
+  \textbf{What actions do the following components need to perform on what resources?}
+\end{center}
+
+\begin{enumerate}
+\item Order script \texttt{order2desk.py}
+\item Order handler function
+\item Monitor script \texttt{monitor.py}
+\end{enumerate}
+
+\end{document}
