@@ -7,12 +7,15 @@ stack_name = 'order2desk'
 cf_client = boto3.client('cloudformation')
 response = cf_client.describe_stacks(StackName=stack_name)
 outputs = response["Stacks"][0]["Outputs"]
-queue_url = cf_output(outputs, "kitchenqurl")
 
+# Queue setup
+queue_url = cf_output(outputs, "kitchenqurl")
 sqs = boto3.client("sqs")
 
+# audit table setup
+audit_table_name = cf_output(outputs, 'audittablename')
 dynamodb = boto3.resource('dynamodb')
-table = dynamodb.Table('audit')
+table = dynamodb.Table(audit_table_name)
 
 def handle_order(event, context):
 
