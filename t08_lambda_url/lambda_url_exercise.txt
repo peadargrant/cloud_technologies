@@ -1,7 +1,12 @@
 Exercise
 ========
 
+0. Create a stack named `lab` from the template `lambda_url_template.yml`
+
 1. Setup a lambda function called webtest with function URL enabled. 
+   Make sure to pick the `lambda-ex-role` as the execution role. 
+   In advanced settings:
+   Turn on function URL and select NONE as the auth type.
 
 2. Modify your function to return the string (test in browser):
 	"Hello from Lambda"
