@@ -1,7 +1,8 @@
 Exercise
 ========
 
-0. Create a stack named `lab` from the template `lambda_url_template.yml`
+0. Create a stack named `lab` from the template `lambda_url_template.yml`.
+   (Use `setup.ps1` to do this.)
 
 1. Setup a lambda function called webtest with function URL enabled. 
    Make sure to pick the `lambda-ex-role` as the execution role. 
@@ -35,3 +36,6 @@ Exercise
 
 9. Modify your function to show the greeting as HTML. 
 
+10. Delete the function.
+
+11. Use `teardown.ps1` to remove the role.
