@@ -1,0 +1,8 @@
+Resources:
+    InputBucket:
+        Type: AWS::S3::Bucket
+
+Outputs:
+    InputBucket:
+        Value: !Ref InputBucket
+        
