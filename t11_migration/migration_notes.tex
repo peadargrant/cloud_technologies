@@ -1,0 +1,146 @@
+\documentclass[slides]{pgnotes}
+
+\title{Migration}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\section{Cloud utilisation}\label{cloud-utilisation}
+
+\subsection{System}\label{system}
+
+Systems of interest can be quite varied. Remember that not all systems
+are 3-tier web or MS-AD environments - there is a huge world out there!
+Some of the most interesting systems are the less usual!
+
+\subsection{Provision models}\label{provision-models}
+
+\begin{description}
+\item[On-site]
+using data centre environment (of varying quality).
+\item[Co-lo]
+in a dedicated data centre facility.
+\item[Cloud]
+using 1 or more cloud providers. (Cloud provider as per Nist definition
+of cloud computing)
+\end{description}
+
+\subsection{Pull factors}\label{pull-factors}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Replacement of capital expenditure by operational expenditure.
+\item
+  Avoiding sunk hardware costs and upgrade cycles.
+\end{enumerate}
+
+\subsection{Push factors}\label{push-factors}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Cost of maintaining on-site data centre environments and their
+  supporting infrastructure (e.g.~power, cooling, monitoring,
+  networking).
+\item
+  Demand for space / reduced rental costs
+\end{enumerate}
+
+\section{Candidate systems}\label{candidate-systems}
+
+Important to consider what can be moved vs what should be moved.
+
+\subsection{System decomposition}\label{system-decomposition}
+
+System needs to be broken down into its constituent components. It is
+best to consider cloud migration as a possibility for individual
+components of an application, rather than the system itself as a unit.
+
+\subsection{Strategies}\label{strategies}
+
+We assume our \emph{source environment} is the setup we are currently
+using. AWS have identified
+\href{https://docs.aws.amazon.com/prescriptive-guidance/latest/migration-replatforming-cots-applications/apg-gloss.html}{7
+Rs} describing different migration strategies:
+
+\begin{description}
+\item[Retire:]
+decommission / remove applications that are no longer needed in your
+source environment.
+\item[Retain:]
+source environment. Candidates:
+
+\begin{itemize}
+\item
+  Applications requiring major refactoring, and you want to postpone
+  that work until a later time.
+\item
+  May be legacy applications without business justification for
+  migrating them.
+\end{itemize}
+\item[Repurchase / replace (drop and shop)]
+switch to a different product (move from custom / COTS to SaaS model).
+Example: Migrate your customer relationship management (CRM) system to
+Salesforce.com.
+\item[Rehost (lift and shift)]
+move application cloud without making changes. Example: Migrate
+on-premises database / server stack from onsite server to an EC2
+instance in the AWS Cloud.
+\item[Relocate (hypervisor-level rehost)]
+extension of the rehost model where an already virtualised environment
+is relocated to the cloud.
+\item[Replatform (lift and reshape):]
+move an application to the cloud, replacing some components with
+cloud-based equivalents. Example: Migrate your on-premises Oracle
+database to Amazon Relational Database Service (Amazon RDS) for Oracle
+in the AWS Cloud.
+\item[Refactor/re-architect:]
+modify architecture to use cloud-native capabilities. Example: Migrate
+your on-premises Oracle database to the Amazon Aurora
+PostgreSQL-Compatible Edition.
+\end{description}
+
+Moving any particular system will may not be a single choice.
+
+\subsection{Contra-indications}\label{contra-indications}
+
+Some components present extreme difficulties (not insurmountable)
+migrating to cloud environments:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Non-PC/ARM based systems.
+\item
+  \textbf{Mainframe} systems (e.g.~IBM z/OS) and so-called
+  \emph{midrange} (e.g.~IBM i) systems.
+\item
+  \textbf{Legacy PC operating systems} (e.g.~OS/2, Xenix, PICK, DOS),
+  particularly early versions without TCP/IP support.
+\item
+  Systems requiring \textbf{access to hardware} (e.g.~serial, parallel,
+  specific interface cards)
+\item
+  Systems that \textbf{cannot function off-line} in the absense of
+  connectivity (e.g.~some business-critical systems)
+\end{enumerate}
+
+May still be possible to move certain components of systems containing
+the above to cloud environments if the system can be clearly decomposed
+into interconnecting parts.
+
+\subsection{Onsite connectivity}\label{onsite-connectivity}
+
+Moving
+
+Possible to connect a VPC to an onsite LAN using a VPN gateway.
+
+Some co-lo data centres offer Amazon Direct Connect (not discussed in
+detail here).
+
+\end{document}
+
