@@ -7,7 +7,7 @@
 # Aim
 
 You will analyze a reasonably complex system that you are familiar with (e.g. your final year project) and identify how all/some of it can be deployed on the cloud.
-For the portions that can be deployed, you will design the system in CloudFormation. 
+For some of the portions that can be deployed, you will implement parts in CloudFormation. 
 
 # Deliverables
 
@@ -37,12 +37,12 @@ Identificatino of and outputs of required data for someone using the template.
 
 ## Setup file (20%)
 
-The setup file should create a stack from your cloudformation file, and should be called `setup.py`.
+The setup file should create a stack from your cloudformation file, and should be called `setup.ps1`.
 It should carry out any other setup activities pre/post the stack creation. 
 
 ## Teardown file (10%)
 
-Teardown file should remove all created resources `teardown.py`. 
+Teardown file should remove all created resources `teardown.ps1`. 
 
 
 # Checking your submission for compliance
@@ -52,14 +52,13 @@ Files that are mis-named or in the wrong format will receive a zero mark.
 
 # How to submit your work
 
-You will submit your work by means of a zip file `ca2.zip`.
+You will submit your work by means of a git repository on https://gitlab.comp.dkit.ie named cloud_ca2.
+You must give grantp developer access to your repository. 
+Repositories will be cloned for grading after the submission date. 
+You do not need to submit anything to the assignment on Moodle. 
 
-## Submission to Moodle
-
-Submit *ONLY* your ZIP file named *exactly* `ca2_submission.zip` to Moodle.
-Do not alter the filename. 
 
 # Feedback
 
 Summary feedback will be given on Moodle.
-Verbal feedback is available on request.
+Verbal feedback is available during consultation.
