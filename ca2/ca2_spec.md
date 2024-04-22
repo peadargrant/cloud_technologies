@@ -4,6 +4,8 @@
 
 **Weight:** 30%
 
+This project is to be done individually.
+
 # Aim
 
 You will analyze a reasonably complex system that you are familiar with (e.g. your final year project) and identify how all/some of it can be deployed on the cloud.
@@ -62,3 +64,4 @@ You do not need to submit anything to the assignment on Moodle.
 
 Summary feedback will be given on Moodle.
 Verbal feedback is available during consultation.
+
