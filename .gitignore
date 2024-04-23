@@ -9,3 +9,4 @@ _minted*
 *.zip
 *.toc
 __pycache__/
+*.bak
