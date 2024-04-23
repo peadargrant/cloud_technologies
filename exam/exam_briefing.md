@@ -15,7 +15,7 @@ Prefer focused bullet points to long rambling prose.
 
 Specific answers addressing question always are better than a "brain dump" about any and all related topics.
 
-Diagrams can help if you find them easier to explain things with.
+Diagrams can help if you find them easier to explain things with, even when not specifically asked for.
 
 Clearly number each question and part.
 
@@ -32,10 +32,15 @@ Leave plenty of white space.
 2. Lambda
    - Handler naming
    - Code update process
-   - Cron invocation
+   - Cron (scheduled) invocation
 
 3. Scaling
    - Advantages of vertical vs horizontal scaling
    - Relational DB scaling patterns
    - EC2 SQS consumer scaling patterns
+
+
+## Other
+
+Code if asked for will be minimal and is not expected to be fully syntactically correct. 
 
