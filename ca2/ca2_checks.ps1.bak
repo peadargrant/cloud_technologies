@@ -2,7 +2,7 @@
 # CA2 checks file
 # Peadar Grant
 
-$Files = @( "plan.txt", "system.yaml", "setup.ps1", "teardown.ps1" )
+$Files = @( "plan.txt", "system.yaml", "setup.py", "teardown.py" )
 
 $problems = $false
 Write-Host "CA1 checks" -ForegroundColor Yellow

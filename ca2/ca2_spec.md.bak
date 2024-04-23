@@ -24,7 +24,7 @@ Identify which parts could be deployed in the cloud, which parts cannot, and the
 
 ## Resource identification (30%)
 
-The CloudFormation file `system.yml` should setup resources needed.
+The CloudFormation file `system.yaml` should setup resources needed.
 This need NOT be all the resources identified in the previous step, rather just a representative sample.
 
 ## Roles (10%)
@@ -34,13 +34,12 @@ Marks will be gained for policies that are specific to the operations and resour
 
 ## Outputs (10%)
 
-Identification of and outputs of required data for someone using the template.
+Identificatino of and outputs of required data for someone using the template.
 (e.g. IP addresses for EC2 instances). 
 
 ## Setup file (20%)
 
 The setup file should create a stack from your cloudformation file, and should be called `setup.ps1`.
-
 It should carry out any other setup activities pre/post the stack creation. 
 
 ## Teardown file (10%)
